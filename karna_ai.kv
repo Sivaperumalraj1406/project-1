@@ -1,0 +1,222 @@
+MainBoxLayout:
+#<MainBoxLayout>:
+    BoxLayout:
+        orientation: "vertical"
+
+# Header of the app
+
+        Label:
+            canvas.before:
+                Color:
+                    rgba: 1,1,1,1
+                Rectangle:
+                    size: root.size
+
+            text: "Karna AI 14.8"
+            font_name: "EA Sports Covers SC 1.5"
+            font_size: 25
+            color: 0,0,0,1
+            size_hint: 1,.1
+
+# Top button of chat, active and passive three
+
+        BoxLayout:
+            orientation: "horizontal"
+            size_hint: 1,.05
+            padding: 3, 3, 3, 3
+            spacing: 3
+
+            # three mode buttons
+
+            Button:  # chat button
+                background_normal: ''
+                background_color: 0.85, 0.85, 0.85, 1
+                id: chat_button
+                text: "Chat"
+                color: 0, 0, 0, 1
+                font_size: 20
+                #radius: "10dp"
+                on_release: root.ProgressBar_chat_HighLight(), root.carousel_page(0)
+
+            Button:  # passive button
+                background_normal: ''
+                background_color: 0.85, 0.85, 0.85, 1
+                id: passive_button
+                text: "Passive"
+                color: 0, 0, 0, 1
+                font_size: 20
+                on_release: root.ProgressBar_passive_HighLight(), root.carousel_page(1)
+
+            Button:  # active button
+                background_normal: ''
+                background_color: 0.85, 0.85, 0.85, 1
+                id: active_button
+                text: "Active"
+                color: 0, 0, 0, 1
+                font_size: 20
+                on_release: root.ProgressBar_active_HighLight(), root.carousel_page(2)
+
+# high lighted of the progress bar three
+
+        BoxLayout:
+            size_hint: 1,.005
+            orientation: "horizontal"
+            ProgressBar:
+                id: chat_bar
+                min: 0
+                max: 1
+                value: int(root.progressbar_chat)
+            ProgressBar:
+                id: passive_bar
+                min: 0
+                max: 1
+                value: int(root.progressbar_passive)
+            ProgressBar:
+                id: active_bar
+                min: 0
+                max: 1
+                value: int(root.progressbar_active)
+
+# carousel of the slider three
+
+        Carousel:
+            id: carousel_slide
+            on_index: root.carousel_index()
+            #loop: True
+
+        # chat box carousel
+
+            BoxLayout:
+                canvas.before:
+                    Color:
+                        rgba: 1,1,1,1
+                    Rectangle:
+                        size: root.size
+                id: chat_carousel
+                orientation: "vertical"
+
+                # the scroll view of the chat messages
+
+                ScrollView:
+                    #do_scroll_x: False
+                    do_scroll_y: True
+                    id: scroll_view
+
+                    #the labels a added as msg input and output
+
+                    BoxLayoutLabel: #it is an class
+                        id: boxlayoutlabel
+                        orientation: "vertical"
+                        size_hint_y: None
+                        height: self.minimum_height
+                        spacing: 30
+                        padding: 10,10,10,10
+                        background_normal: ''
+                        background_color: 0.85, 0.85, 0.85, 1
+
+                        #canvas.before:
+                            #Color:
+                                #rgba: 0.725,0.725,0.725,1
+                            #Rectangle:
+                                #pos: self.center_x, self.center_y
+                                #size: self.width - 20, self.height + 20
+                                #padding: 10,10,10,10
+                                #size: self.size
+
+                # msg typing and validate button
+
+                BoxLayout:
+                    orientation: "horizontal"
+                    size_hint: 1, None
+                    #height: root.chat_input_textbox
+                    height: self.minimum_height + 5
+                    radius: "10dp"
+                    TextInput:
+                        id: chat_text_input
+                        multiline: True
+                        size_hint: 1, None
+                        #height: root.chat_input_textbox
+                        height: self.minimum_height + 5
+                        hint_text: "Chat"
+                        halign: "center"
+                        radius: "10dp"
+                        #on_text_validate: root.enter_in_chat_textbox()
+                    Button:
+                        font_size: 15
+                        background_normal: ''
+                        background_color: 0.32, 0.65, 0.84, 1
+                        text: "<<-"
+                        size_hint: .15, None
+                        height: "29dp"
+                        on_press: root.add_text_scrollview()
+                BoxLayout:
+                    orientation: "horizontal"
+                    size_hint: 1, 0.014
+                    Label:
+                        size_hint: 1, 0.001
+
+            #carousal second
+
+            BoxLayout:
+                id: passive_carousel
+                orientation: "vertical"
+                Image:
+                    source: 'Daco_4619059.png'
+                    size_hint: 1, .9
+                Label:
+                    id: passive_label_talk
+                    text: root.output_passive
+                    size_hint: .9, .40
+                    color: 0,0,0,1
+                    text_size: self.width, None
+                    pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                    #font_name: "font/m23"
+                    font_size: 23
+                    halign: "center"
+                Label:
+                    id: passive_label_output
+                    text: root.output_from_mic
+                    size_hint: .9, .85
+                    color: 0,0,0,1
+                    text_size: self.width, None
+                    pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                Button:
+                    id: start_listening_id
+                    background_normal: ''
+                    background_color: 0.32, 0.65, 0.84, 1
+                    text: "Start Listening"
+                    size_hint: .85, 0.15
+                    pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                    font_size: 25
+                    on_release: root.start_listening()
+                Label:
+                    size_hint: 1, 0.03
+
+            #carousal third
+
+            BoxLayout:
+                id: active_carousel
+                orientation: "vertical"
+                ScrollView:
+                    do_scroll_y: True
+                    id: scroll_view_active
+
+                    #the labels a added as msg input and output
+
+                    BoxLayoutLabel: #it is an class
+                        id: boxlayoutlabel_while
+                        orientation: "vertical"
+                        size_hint_y: None
+                        height: self.minimum_height
+                Button:
+                    id: while_loop_button
+                    text: "While Loop"
+                    background_normal: ''
+                    background_color: 0.32, 0.65, 0.84, 1
+                    size_hint: .85, 0.07
+                    pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                    font_size: 25
+                    #on_release: root.initiate_continuous_interaction()
+                Label:
+                    size_hint: 1, 0.013
+#<BoxLayoutLabel>:
