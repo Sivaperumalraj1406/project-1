@@ -37,7 +37,7 @@ version = 0.1
 
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
-requirements = python3==3.11.4,hostpython3==3.11.4,kivy==2.2.1,pillow,speech_recognition,pyttsx3,pywhatkit,wikipedia,pyjokes
+requirements = python3==3.11.4,hostpython3==3.11.4,kivy==2.2.1,pillow,speech_recognition,pyttsx3,pywhatkit,wikipedia,pyjokes,--with-build-python
 
 # (str) Custom source folders for requirements
 # Sets custom source for any requirements with recipes
